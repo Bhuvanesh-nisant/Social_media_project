@@ -2,6 +2,8 @@
 .form-background {
     background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque for better visibility */
     backdrop-filter: blur(15px); /* Increase blur for a more glassy effect */
+    padding: 20px; /* Add some padding to the form */
+    border-radius: 15px; /* Rounded corners for the form */
 }
 
 /* Style for the login card */
@@ -14,6 +16,7 @@
     width: 90%; /* Full width of the column */
     transition: transform 0.3s ease; /* Add transition effect on hover */
     margin: auto; /* Center card horizontally */
+    z-index: 3; /* Ensure it appears above background */
 }
 
 /* Glossy effect on hover */
@@ -27,6 +30,7 @@
     border: 1px solid rgba(0, 0, 0, 0.2); /* Light border */
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Inner shadow */
     padding: 12px; /* Increased padding for better touch target */
+    margin-bottom: 20px; /* Space between input fields */
 }
 
 /* Style for password visibility toggle */
@@ -44,6 +48,7 @@
     font-weight: bold; /* Bold text */
     padding: 12px; /* Increased padding for buttons */
     transition: background-color 0.3s ease; /* Transition effect for hover */
+    width: 100%; /* Full width for the button */
 }
 
 /* Button hover effects */
@@ -88,4 +93,14 @@
 /* Centering text */
 .text-center {
     text-align: center; /* Center text */
+}
+
+/* Aligning the form within the home page */
+.align-login {
+    display: flex; /* Flexbox for alignment */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    position: relative; /* Ensure positioning works */
+    z-index: 2; /* Place above background */
 }
