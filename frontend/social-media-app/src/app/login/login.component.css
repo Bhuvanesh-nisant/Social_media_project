@@ -1,0 +1,91 @@
+/* Background for the form */
+.form-background {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque for better visibility */
+    backdrop-filter: blur(15px); /* Increase blur for a more glassy effect */
+}
+
+/* Style for the login card */
+.login-card {
+    border: none; /* Remove card border */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow effect */
+    padding: 40px; /* Increased padding for better spacing */
+    max-width: 500px; /* Set a maximum width for the card */
+    width: 90%; /* Full width of the column */
+    transition: transform 0.3s ease; /* Add transition effect on hover */
+    margin: auto; /* Center card horizontally */
+}
+
+/* Glossy effect on hover */
+.login-card:hover {
+    transform: translateY(-5px); /* Slightly lift the card */
+}
+
+/* Input field styles */
+.form-control {
+    border-radius: 8px; /* Rounded corners for input fields */
+    border: 1px solid rgba(0, 0, 0, 0.2); /* Light border */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Inner shadow */
+    padding: 12px; /* Increased padding for better touch target */
+}
+
+/* Style for password visibility toggle */
+.password-toggle {
+    cursor: pointer; /* Pointer cursor on hover */
+    position: absolute; /* Position inside the input field */
+    right: 10px; /* Right padding */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical alignment */
+}
+
+/* Button styles */
+.btn {
+    border-radius: 8px; /* Rounded corners for buttons */
+    font-weight: bold; /* Bold text */
+    padding: 12px; /* Increased padding for buttons */
+    transition: background-color 0.3s ease; /* Transition effect for hover */
+}
+
+/* Button hover effects */
+.btn:hover {
+    background-color: rgba(0, 123, 255, 0.8); /* Slightly change the background on hover */
+}
+
+/* Links */
+.text-decoration-none:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Additional styles for the modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Ensure modal is above other content */
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.8); /* Slightly transparent white for glossy effect */
+    border-radius: 15px; /* Rounded corners for the modal */
+    padding: 20px; /* Padding for modal body */
+    width: 500px; /* Set width for the modal */
+    max-width: 90%; /* Responsive max width */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    backdrop-filter: blur(15px); /* Increase blur for a glassy effect */
+}
+
+/* Additional spacing */
+.mb-3 {
+    margin-bottom: 1.2rem; /* Bottom margin */
+}
+
+/* Centering text */
+.text-center {
+    text-align: center; /* Center text */
+}

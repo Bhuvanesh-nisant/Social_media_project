@@ -1,0 +1,81 @@
+.home-page {
+  position: relative;
+  height: 100vh; 
+  color: white; 
+}
+
+.background-image {
+  background-image: url('../../assets/images/mainbackground.jpg'); 
+  background-size: cover; 
+  background-position: center; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  filter: brightness(60%); 
+  z-index: 1; 
+}
+
+.overlay-content {
+  position: relative; /* Position relative to the parent */
+  z-index: 2; /* Above the background */
+  display: flex; /* Use flexbox for alignment */
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  height: 100%; /* Full height of the container */
+  text-align: center; /* Center text */
+}
+
+.overlay-content h1 {
+  font-size: 2.5rem; /* Larger font size for the welcome message */
+  margin-bottom: 20px; /* Space below the heading */
+}
+
+.overlay-content p {
+  font-size: 1.2rem; /* Adjust font size for the description */
+  margin-bottom: 30px; /* Space below the paragraph */
+}
+
+.btn {
+  font-size: 1.0rem; /* Larger button text */
+  padding: 10px 10px; /* Button padding */
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.8); /* White with transparency for the modal */
+  backdrop-filter: blur(10px); /* Blur effect for the background */
+  border-radius: 10px; /* Rounded corners for the modal */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+}
+
+.modal-header {
+  border-bottom: none; /* Remove border for cleaner look */
+}
+
+.modal-body {
+  padding: 20px; /* Padding for modal body */
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Ensure modal is above other content */
+  }
+  
+  .modal-content {
+    background: rgba(255, 255, 255, 0.9); /* Slightly transparent white for glossy effect */
+    border-radius: 15px;
+    padding: 20px;
+    width: 400px; /* Adjust width as needed */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  }
+  

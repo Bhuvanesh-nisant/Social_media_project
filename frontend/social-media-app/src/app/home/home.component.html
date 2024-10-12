@@ -1,0 +1,15 @@
+<div class="home-page">
+  <div class="background-image"></div>
+  <div class="overlay-content">
+    <h1>Welcome to Our App!</h1>
+    <p>Join us today and enjoy our services.</p>
+    <button class="btn btn-primary btn-lg" (click)="showLogin = true">Get Started</button>
+  </div>
+
+  <!-- Modal for login -->
+  <div *ngIf="showLogin" class="modal-overlay" (click)="closeLoginPopup()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <app-login (closeModal)="closeLoginPopup()"></app-login>
+    </div>
+  </div>
+</div>

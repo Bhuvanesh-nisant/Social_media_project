@@ -1,0 +1,42 @@
+<div class="container-fluid form-background"> 
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-md-12"> <!-- Change col-md-4 to col-md-12 to allow full width for the card -->
+        <div class="card login-card p-4">
+          <h1 class="form text-center mb-4">Login</h1>
+          <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+            <div class="form-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Email or phone number"
+                [(ngModel)]="userId"
+                name="userId"
+                required />
+            </div>
+            <div class="form-group mb-3 position-relative">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                class="form-control"
+                placeholder="Password"
+                [(ngModel)]="password"
+                name="password"
+                required />
+              <span class="password-toggle" (click)="togglePasswordVisibility()">
+                <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block mb-3">
+              Log In
+            </button>
+          </form>
+          <div class="text-center">
+            <a href="#" class="text-decoration-none">Forgot password?</a>
+          </div>
+          <hr />
+          <div class="text-center">
+            <button class="btn btn-success btn-lg" (click)="navigateToSignup()">Create New Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
