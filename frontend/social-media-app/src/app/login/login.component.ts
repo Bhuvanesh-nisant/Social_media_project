@@ -14,25 +14,28 @@ export class LoginComponent {
   password: string = '';
   showPassword: boolean = false;
 
-  constructor(private http: HttpClient,private route:Router) {}
-
+  constructor(private http: HttpClient, private route: Router) {}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
   
-  navigateToSignup(){
-    this.route.navigate(['/signup'])
+  navigateToSignup() {
+    this.route.navigate(['/signup']);
   }
   
-
   onSubmit(form: NgForm) {
+    
+    if (form.invalid) {
+      return;
+    }
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
 
     const body = new URLSearchParams();
-    body.set('userid', this.userId); // Fixed 'userid' to match backend
+    body.set('userid', this.userId);
     body.set('password', this.password);
 
     this.http.post('http://localhost:8080/login', body.toString(), { headers, responseType: 'json' })
@@ -40,8 +43,8 @@ export class LoginComponent {
         next: (response: any) => {
           console.log('Login successful', response);
           // alert(`Token: ${response.token}`);
-          this.resetForm(form); // Reset the form
-          this.closeModal.emit(); // Close the modal
+          this.resetForm(form);
+          this.closeModal.emit();
         },
         error: (err) => {
           console.log('Login failed', err);
@@ -54,7 +57,4 @@ export class LoginComponent {
     this.userId = '';
     this.password = '';
   }
-  
-
-
 }

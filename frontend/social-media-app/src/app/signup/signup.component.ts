@@ -12,11 +12,16 @@ export class SignupComponent {
   password: string = '';
   confirmPassword: string = '';
   mobileNo: string = '';
+
   onSubmit(form: NgForm) {
     if (this.password !== this.confirmPassword) {
-      alert('Passwords do not match');
+      alert('Password do not match');
       return;
     }
 
-}
+    if (form.valid) {
+
+      console.log('Form Submitted!', form.value);
+    }
+  }
 }

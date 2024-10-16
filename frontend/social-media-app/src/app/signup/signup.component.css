@@ -1,0 +1,73 @@
+body {
+    background-color: #E9E9E9; /* Light gray background for the entire page */
+}
+
+.signup-container {
+    background-color: #ffffff; /* White background for the signup form */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 30px; /* Padding for the container */
+    max-width: 400px; /* Maximum width for the signup form */
+    margin: 20px auto; /* Center the form horizontally */
+}
+
+h1 {
+    color: #4267B2; /* Facebook blue for the header */
+    margin-bottom: 20px; /* Space below the header */
+    text-align: center; /* Center the header text */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Space between form groups */
+}
+
+label {
+    display: block; /* Make labels block elements */
+    margin-bottom: 5px; /* Space below labels */
+    font-weight: bold; /* Bold labels */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%; /* Full width of input fields */
+    padding: 10px; /* Padding inside input fields */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Inner shadow */
+    transition: border-color 0.3s ease; /* Smooth border color transition */
+}
+
+input:focus {
+    border-color: #007bff; /* Border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+.error-message {
+    color: red; /* Red color for error messages */
+    font-size: 0.875rem; /* Smaller font size for error messages */
+    margin-top: 5px; /* Space above error messages */
+}
+
+button[type="submit"] {
+    width: 100%; /* Full width button */
+    padding: 12px; /* Button padding */
+    background-color: #4267B2; /* Facebook blue for the button */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s ease; /* Transition effect */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+button[type="submit"]:hover {
+    background-color: #365899; /* Darker blue on hover */
+}
+
+@media (max-width: 576px) {
+    .signup-container {
+        padding: 20px; /* Reduced padding for smaller screens */
+        width: 90%; /* Full width on smaller screens */
+    }
+}
