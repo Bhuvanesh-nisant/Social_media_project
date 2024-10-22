@@ -6,6 +6,13 @@
     border-radius: 15px; /* Rounded corners for the form */
 }
 
+/* Error message style */
+.error-message {
+    color: red;
+    opacity: 85%;
+    margin-bottom: 10px; /* Add spacing between error message and the input */
+}
+
 /* Style for the login card */
 .login-card {
     border: none; /* Remove card border */
@@ -30,16 +37,33 @@
     border: 1px solid rgba(0, 0, 0, 0.2); /* Light border */
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Inner shadow */
     padding: 12px; /* Increased padding for better touch target */
+    padding-right: 2.5rem; /* Space for the eye icon */
     margin-bottom: 20px; /* Space between input fields */
+    position: relative;
+    min-height: 48px; /* Ensure enough height to prevent shifting when errors appear */
 }
 
 /* Style for password visibility toggle */
 .password-toggle {
-    cursor: pointer; /* Pointer cursor on hover */
-    position: absolute; /* Position inside the input field */
-    right: 10px; /* Right padding */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust for vertical alignment */
+    cursor: pointer;
+    position: absolute;
+    right: 15px; /* Right-aligned */
+    top: 35%; /* Adjust top position for consistent alignment */
+    transform: translateY(-50%); /* Center vertically */
+    font-size: 1.2rem; /* Responsive font size for the icon */
+    color: #666; /* Neutral color for the icon */
+}
+
+/* Adjustments for mobile screens */
+@media (max-width: 576px) {
+    .form-control {
+        padding-right: 2rem; /* Adjust padding for smaller screens */
+    }
+    
+    .password-toggle {
+        right: 10px; /* Adjust positioning for smaller screens */
+        font-size: 1rem; /* Adjust icon size for smaller screens */
+    }
 }
 
 /* Button styles */
