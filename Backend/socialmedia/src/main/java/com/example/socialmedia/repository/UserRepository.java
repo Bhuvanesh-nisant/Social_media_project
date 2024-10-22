@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface UserRepository extends CrudRepository<SocialMediaUser, Integer> {
     Optional<SocialMediaUser> findByUseridAndPassword(String userid, String password);
-    Optional<SocialMediaUser> findByUserid(String userid);
+    
 }
