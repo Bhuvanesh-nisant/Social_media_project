@@ -13,6 +13,7 @@ export class LoginComponent {
   userId: string = '';
   password: string = '';
   showPassword: boolean = false;
+  loginError: string = ''; // Add this to track login errors
 
   constructor(private http: HttpClient, private route: Router) {}
 
@@ -42,13 +43,13 @@ export class LoginComponent {
       .subscribe({
         next: (response: any) => {
           console.log('Login successful', response);
-          // alert(`Token: ${response.token}`);
           this.resetForm(form);
           this.closeModal.emit();
+          this.loginError = ''; // Reset error on successful login
         },
         error: (err) => {
           console.log('Login failed', err);
-          alert('incorrect password or username');
+          this.loginError = 'Incorrect password or username'; // Set error message if login fails
         }
       });
   }
@@ -57,5 +58,6 @@ export class LoginComponent {
     form.reset();
     this.userId = '';
     this.password = '';
+    this.loginError = ''; // Reset the error message on form reset
   }
 }
