@@ -8,6 +8,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { NewsfeedComponent } from './newsfeed/newsfeed.component';
+
 
 
 
@@ -16,7 +19,9 @@ import { SignupComponent } from './signup/signup.component';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    SignupComponent
+    SignupComponent,
+    ForgotPasswordComponent,
+    NewsfeedComponent,
   ],
   imports: [
     BrowserModule,

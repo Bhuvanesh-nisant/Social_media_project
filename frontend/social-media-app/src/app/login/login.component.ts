@@ -24,6 +24,9 @@ export class LoginComponent {
   navigateToSignup() {
     this.route.navigate(['/signup']);
   }
+  fdPassword(){
+    this.route.navigate(['/forgot-password']);
+  }
   
   onSubmit(form: NgForm) {
     
@@ -51,6 +54,7 @@ export class LoginComponent {
           console.log('Login failed', err);
           this.loginError = 'Incorrect password or username'; // Set error message if login fails
         }
+        
       });
   }
 
@@ -59,5 +63,8 @@ export class LoginComponent {
     this.userId = '';
     this.password = '';
     this.loginError = ''; // Reset the error message on form reset
+    
+    this.route.navigate(['newsfeed'])
+    
   }
 }
