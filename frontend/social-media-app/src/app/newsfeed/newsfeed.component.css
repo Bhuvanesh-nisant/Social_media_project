@@ -1,0 +1,53 @@
+.newsfeed-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .post {
+    width: 50%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .post-header h5 {
+    margin: 0;
+  }
+  
+  .post-header p {
+    color: #888;
+    font-size: 0.9em;
+  }
+  
+  .post-content {
+    margin-top: 15px;
+  }
+  
+  .post-image {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .post-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .comment-section {
+    margin-top: 15px;
+  }
+  
+  .comments-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+  
+  .comments-list li {
+    padding: 5px 0;
+    border-bottom: 1px solid #f1f1f1;
+  }
+  

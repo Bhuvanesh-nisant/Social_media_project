@@ -62,7 +62,7 @@ export class LoginComponent {
     form.reset();
     this.userId = '';
     this.password = '';
-    this.loginError = ''; // Reset the error message on form reset
+    this.loginError = ''; 
     
     this.route.navigate(['newsfeed'])
     

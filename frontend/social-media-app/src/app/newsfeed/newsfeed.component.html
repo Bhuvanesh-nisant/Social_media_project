@@ -1,1 +1,37 @@
-<p>newsfeed works!</p>
+<div class="newsfeed-container">
+    <div class="post">
+      <div class="post-header">
+        <h5>Bhuvanesh</h5>
+        <p>1 day ago</p>
+      </div>
+      <div class="post-content">
+        <p>Test Post</p>
+        <img src="../../assets/images/loginbackgroud.jpg" alt="post image" class="post-image" />
+      </div>
+      <div class="post-actions">
+        <button (click)="increaseLike()" class="btn btn-light">
+          👍 Like {{ likeCount }}
+        </button>
+        <button class="btn btn-light">💬 Comment</button>
+        <button class="btn btn-light">↪️ Share</button>
+      </div>
+      <div class="comment-section">
+        <h6>Comments</h6>
+        <form (submit)="addComment($event)">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="newComment"
+            name="comment"
+            placeholder="Write a comment..."
+            required
+          />
+          <button type="submit" class="btn btn-primary">Add Comment</button>
+        </form>
+        <ul class="comments-list">
+          <li *ngFor="let comment of comments">{{ comment }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

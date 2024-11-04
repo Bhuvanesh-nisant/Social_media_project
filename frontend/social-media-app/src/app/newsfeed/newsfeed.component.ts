@@ -6,5 +6,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./newsfeed.component.css']
 })
 export class NewsfeedComponent {
+  likeCount: number = 0;
+  newComment: string = '';
+  comments: string[] = [];
 
+  increaseLike() {
+    this.likeCount++;
+  }
+
+  addComment(event: Event) {
+    event.preventDefault();
+    if (this.newComment.trim()) {
+      this.comments.push(this.newComment.trim());
+      this.newComment = '';
+    }
+  }
 }
