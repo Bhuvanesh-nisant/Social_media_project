@@ -1,37 +1,38 @@
 <div class="newsfeed-container">
-    <div class="post">
-      <div class="post-header">
-        <h5>Bhuvanesh</h5>
-        <p>1 day ago</p>
-      </div>
-      <div class="post-content">
-        <p>Test Post</p>
-        <img src="../../assets/images/loginbackgroud.jpg" alt="post image" class="post-image" />
-      </div>
-      <div class="post-actions">
-        <button (click)="increaseLike()" class="btn btn-light">
-          👍 Like {{ likeCount }}
-        </button>
-        <button class="btn btn-light">💬 Comment</button>
-        <button class="btn btn-light">↪️ Share</button>
-      </div>
-      <div class="comment-section">
-        <h6>Comments</h6>
-        <form (submit)="addComment($event)">
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="newComment"
-            name="comment"
-            placeholder="Write a comment..."
-            required
-          />
-          <button type="submit" class="btn btn-primary">Add Comment</button>
-        </form>
-        <ul class="comments-list">
-          <li *ngFor="let comment of comments">{{ comment }}</li>
-        </ul>
-      </div>
+  <div class="post" *ngFor="let post of posts">
+    <div class="post-header">
+      <h5>{{ post.username }}</h5>
+      <p>{{ formatTime(post.postedAgo) }}</p>
+    </div>
+    <div class="post-content">
+      <p>{{ post.content }}</p>
+      <img [src]="post.image" alt="post image" class="post-image" />
+    </div>
+    <div class="post-actions">
+      <button (click)="increaseLike(post)" class="btn btn-light">
+        👍 Like {{ post.likeCount }}
+      </button>
+      <button class="btn btn-light">💬 Comment</button>
+      <button class="btn btn-light">↪️ Share</button>
+    </div>
+    <div class="comment-section">
+      <h6>Comments</h6>
+      <form (submit)="addComment(post, $event)">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="newComment"
+          name="comment"
+          placeholder="Write a comment..."
+          required
+        />
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+      </form>
+      <ul class="comments-list">
+        <li *ngFor="let comment of post.comments">
+          {{ comment.content }} - <small>{{ formatTime(comment.timestamp) }}</small>
+        </li>
+      </ul>
     </div>
   </div>
-  
+</div>
