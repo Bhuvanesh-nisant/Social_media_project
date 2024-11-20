@@ -6,7 +6,7 @@
     </div>
     <div class="post-content">
       <p>{{ post.content }}</p>
-      <img [src]="post.image" alt="post image" class="post-image" />
+      <img [src]="post.image" alt="Post image" class="post-image" *ngIf="post.image" />
     </div>
     <div class="post-actions">
       <button (click)="increaseLike(post)" class="btn btn-light">

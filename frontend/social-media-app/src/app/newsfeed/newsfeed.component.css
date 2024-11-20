@@ -1,53 +1,103 @@
 .newsfeed-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .post {
-    width: 50%;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff;
-  }
-  
-  .post-header h5 {
-    margin: 0;
-  }
-  
-  .post-header p {
-    color: #888;
-    font-size: 0.9em;
-  }
-  
-  .post-content {
-    margin-top: 15px;
-  }
-  
-  .post-image {
-    width: 100%;
-    margin-top: 10px;
-  }
-  
-  .post-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .comment-section {
-    margin-top: 15px;
-  }
-  
-  .comments-list {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 10px;
-  }
-  
-  .comments-list li {
-    padding: 5px 0;
-    border-bottom: 1px solid #f1f1f1;
-  }
-  
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap; /* Allow items to wrap for responsiveness */
+}
+
+.post {
+  width: 100%;
+  max-width: 500px; /* Set a maximum width for better control */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-bottom: 20px; /* Spacing between posts */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover effects */
+}
+
+.post:hover {
+  transform: scale(1.02); /* Slight zoom on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
+.post-header h5 {
+  margin: 0;
+  font-size: 1.2em; /* Slightly larger title */
+  font-weight: bold;
+}
+
+.post-header p {
+  color: #888;
+  font-size: 0.9em;
+}
+
+.post-content {
+  margin-top: 15px;
+  font-size: 1em;
+  line-height: 1.6; /* Improves readability */
+}
+
+.post-image {
+  width: 100%;
+  max-height: 400px; /* Limiting image height to prevent excessive zoom */
+  object-fit: cover; /* Ensures images fill the space without distortion */
+  margin-top: 10px;
+}
+
+.post-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  font-size: 1.1em; /* Make the action buttons a bit larger */
+}
+
+.post-actions a {
+  text-decoration: none;
+  color: #007bff; /* Blue color for links */
+}
+
+.post-actions a:hover {
+  text-decoration: underline; /* Underline links on hover */
+}
+
+.comment-section {
+  margin-top: 15px;
+}
+
+.comments-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.comments-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.comment-form input[type="text"],
+.comment-form button {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.comment-form button {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.comment-form button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
