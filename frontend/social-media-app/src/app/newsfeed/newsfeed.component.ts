@@ -7,11 +7,12 @@ interface Comment {
 }
 
 interface Post {
-  id: number; // Added for identifying posts
+  postId: number;
+  id?: number; 
   username: string;
   postedAgo: string;
   content: string;
-  image: string |null; 
+  image: string | null;
   likeCount: number;
   comments: Comment[];
 }
@@ -31,15 +32,16 @@ export class NewsfeedComponent implements OnInit {
     this.loadPosts();
   }
 
-  // Load posts from the backend API
   loadPosts(): void {
     this.http.get<Post[]>('http://localhost:8080/api/newsfeed').subscribe(
       (data) => {
-        // Process posts to include base64 image conversion if needed
+        
         this.posts = data.map(post => ({
           ...post,
+          id: post.postId, 
           image: post.image ? `data:image/jpeg;base64,${post.image}` : null
         }));
+        console.log('Loaded posts:', this.posts); // Debugging: Log loaded posts
       },
       (error) => {
         console.error('Error loading posts', error);
@@ -47,34 +49,42 @@ export class NewsfeedComponent implements OnInit {
     );
   }
 
-  // Format the timestamp for display
   formatTime(timestamp: string): string {
     const date = new Date(timestamp);
     return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
   }
 
-  // Increase like count (local operation)
-  increaseLike(post: Post): void {
-    post.likeCount++;
-    // Optional: Call the backend to update the like count in the database
-    // this.http.post(`http://localhost:8080/api/posts/${post.id}/like`, {}).subscribe();
+  increaseLike(postId: number): void {
+    this.http.post(`http://localhost:8080/api/newsfeed/${postId}/like`, {}, { responseType: 'text' })
+      .subscribe({
+        next: (response) => {
+          console.log('Like response:', response);
+          const post = this.posts.find(post => post.postId === postId);
+          if (post) {
+            post.likeCount++;
+          }
+        },
+        error: (error) => {
+          console.error('Error liking post', error);
+        }
+      });
   }
 
-  // Add a comment to a post
   addComment(post: Post, event: Event): void {
-    event.preventDefault(); // Prevent the form from submitting
+    event.preventDefault();
     if (this.newComment.trim()) {
       const newComment: Comment = {
         content: this.newComment.trim(),
-        timestamp: new Date().toISOString() // Use current time for new comment
+        timestamp: new Date().toISOString()
       };
 
-      // Add comment locally for immediate UI update
-      post.comments.push(newComment);
-      this.newComment = ''; // Clear input field
+      post.comments.push(newComment); // Add comment locally for instant feedback
+      this.newComment = ''; // Clear the input field
 
-      // Optional: Call the backend to persist the comment in the database
-      // this.http.post(`http://localhost:8080/api/posts/${post.id}/comments`, newComment).subscribe();
+      this.http.post(`http://localhost:8080/api/newsfeed/${post.id}/comments`, newComment).subscribe(
+        () => console.log(`Comment added to post ${post.id}`),
+        (error) => console.error('Error adding comment', error)
+      );
     }
   }
 }

@@ -3,13 +3,14 @@
     <div class="post-header">
       <h5>{{ post.username }}</h5>
       <p>{{ formatTime(post.postedAgo) }}</p>
+      <small>Post ID: {{ post.id }}</small> <!-- Debugging: Display Post ID -->
     </div>
     <div class="post-content">
       <p>{{ post.content }}</p>
-      <img [src]="post.image" alt="Post image" class="post-image" *ngIf="post.image" />
+      <img [src]="post.image" alt="post image" class="post-image" *ngIf="post.image" />
     </div>
     <div class="post-actions">
-      <button (click)="increaseLike(post)" class="btn btn-light">
+      <button (click)="increaseLike(post.postId)" class="btn btn-light">
         👍 Like {{ post.likeCount }}
       </button>
       <button class="btn btn-light">💬 Comment</button>

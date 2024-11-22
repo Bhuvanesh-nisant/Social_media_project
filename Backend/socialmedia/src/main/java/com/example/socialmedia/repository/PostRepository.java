@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.example.socialmedia.model.Comment;
 import com.example.socialmedia.model.PostWithComments;
 
+
+
 @Repository
 public class PostRepository {
     private final JdbcClient jdbcClient;
@@ -17,37 +19,52 @@ public class PostRepository {
     }
 
     public List<PostWithComments> getAllPostsWithComments() {
-        String postQuery = """
+        String fetchPostsQuery = """
             SELECT id, username, postedAgo, content, image, likeCount
             FROM posts
         """;
 
-        String commentQuery = """
+        String fetchCommentsQuery = """
             SELECT id, content, timestamp
             FROM comments
             WHERE post_id = ?
         """;
 
-        return jdbcClient.sql(postQuery).query((rs, rowNum) -> {
-            int postId = rs.getInt("id");
-            List<Comment> comments = jdbcClient.sql(commentQuery)
+        return jdbcClient.sql(fetchPostsQuery).query((postRs, postRowNum) -> {
+            int postId = postRs.getInt("id");
+
+            List<Comment> comments = jdbcClient.sql(fetchCommentsQuery)
                 .param(postId)
-                .query((crs, crowNum) -> new Comment(
-                    crs.getInt("id"),
-                    crs.getString("content"),
-                    crs.getString("timestamp")
+                .query((commentRs, commentRowNum) -> new Comment(
+                    commentRs.getInt("id"),
+                    commentRs.getString("content"),
+                    commentRs.getString("timestamp")
                 ))
                 .list();
 
             return new PostWithComments(
                 postId,
-                rs.getString("username"),
-                rs.getString("postedAgo"),
-                rs.getString("content"),
-                rs.getBytes("image"),
-                rs.getInt("likeCount"),
+                postRs.getString("username"),
+                postRs.getString("postedAgo"),
+                postRs.getString("content"),
+                postRs.getBytes("image"),
+                postRs.getInt("likeCount"),
                 comments
             );
         }).list();
     }
+
+    public boolean incrementLikeCount(int postId) {
+    	String updateQuery = "UPDATE posts SET likeCount = likeCount + 1 WHERE id = ?";
+        return jdbcClient.sql(updateQuery).param(postId).update() > 0;
+    }
+
+    public void addComment(int postId, Comment comment) {
+        String insertQuery = "INSERT INTO comments (post_id, content) VALUES (?, ?)";
+        jdbcClient.sql(insertQuery)
+            .param(postId)
+            .param(comment.content())
+            .update();
+    }
+
 }
