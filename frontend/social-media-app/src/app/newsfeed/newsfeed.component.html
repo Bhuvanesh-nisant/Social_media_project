@@ -1,9 +1,25 @@
+<nav class="navbar">
+  <div class="navbar-logo">
+    <img src="../../assets/images/android-chrome-192x192.png" alt="Logo" />
+    <span>MySocial</span>
+  </div>
+  <div class="navbar-search">
+    <input type="text" placeholder="Search" />
+  </div>
+  <div class="navbar-links">
+    <!-- <button>Home</button> -->
+    <button>Profile</button>
+    <button (click)="Logout()">Logout</button>
+  </div>
+</nav>
+
+
+
 <div class="newsfeed-container">
   <div class="post" *ngFor="let post of posts">
     <div class="post-header">
       <h5>{{ post.username }}</h5>
       <p>{{ formatTime(post.postedAgo) }}</p>
-      <small>Post ID: {{ post.id }}</small> <!-- Debugging: Display Post ID -->
     </div>
     <div class="post-content">
       <p>{{ post.content }}</p>

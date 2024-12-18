@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 interface Comment {
   content: string;
@@ -26,11 +27,17 @@ export class NewsfeedComponent implements OnInit {
   posts: Post[] = [];
   newComment: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private route: Router) {}
 
   ngOnInit(): void {
-    this.loadPosts();
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      this.route.navigate(['/login']);
+    } else {
+      this.loadPosts();
+    }
   }
+  
 
   loadPosts(): void {
     this.http.get<Post[]>('http://localhost:8080/api/newsfeed').subscribe(
@@ -87,4 +94,14 @@ export class NewsfeedComponent implements OnInit {
       );
     }
   }
+  Logout(): void {
+    // Clear token and timestamp from localStorage
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('tokenTimestamp');
+  
+    // Redirect to home
+    this.route.navigate(['/home']);
+  }
+  
+
 }

@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
+import { ProfileComponent } from './profile/profile.component';
+
 
 
 
@@ -22,6 +24,8 @@ import { NewsfeedComponent } from './newsfeed/newsfeed.component';
     SignupComponent,
     ForgotPasswordComponent,
     NewsfeedComponent,
+    ProfileComponent,
+
   ],
   imports: [
     BrowserModule,

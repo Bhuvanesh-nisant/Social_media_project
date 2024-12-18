@@ -1,6 +1,6 @@
 <div class="container-fluid form-background">
   <div class="row justify-content-center align-items-center h-100">
-    <div class="col-md-12"> <!-- Full width for the card -->
+    <div class="col-md-12">
       <div class="card login-card p-4">
         <h1 class="form text-center mb-4">Login</h1>
         <div *ngIf="loginError" class="error-message text-center mb-3">{{ loginError }}</div>
@@ -9,10 +9,11 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Email or Userid"
+              placeholder="Email or User ID"
               [(ngModel)]="userId"
               name="userId"
-              required />
+              required
+            />
             <div *ngIf="form.submitted && !userId" class="error-message">User ID is required.</div>
           </div>
           <div class="form-group mb-3 position-relative">
@@ -22,16 +23,18 @@
               placeholder="Password"
               [(ngModel)]="password"
               name="password"
-              required />
+              required
+            />
             <span class="password-toggle" (click)="togglePasswordVisibility()">
               <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
             </span>
             <div *ngIf="form.submitted && !password" class="error-message">Password is required.</div>
           </div>
-          <button 
-            type="submit" 
-            class="btn btn-primary btn-lg btn-block mb-3" 
-            [disabled]="!userId || !password"> <!-- Disable button if either field is empty -->
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg btn-block mb-3"
+            [disabled]="!userId || !password"
+          >
             Log In
           </button>
         </form>

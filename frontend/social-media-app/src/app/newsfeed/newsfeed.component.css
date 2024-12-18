@@ -97,3 +97,61 @@
 .comment-form button:hover {
   background-color: #0056b3; /* Darker blue on hover */
 }
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.navbar-logo span {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+}
+
+.navbar-search input {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  width: 250px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 15px;
+}
+
+.navbar-links button {
+  padding: 8px 15px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 0.9em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-links button:hover {
+  background-color: #0056b3;
+}
