@@ -1,23 +1,79 @@
 /* Cover Photo */
+.cover-photo {
+  position: relative;
+  height: 300px; /* Height of cover photo */
+  overflow: hidden;
+}
+
 .cover-photo img {
-    height: 300px;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures image covers the area without distortion */
+}
+
+/* Profile Photo */
+.profile-photo {
+  position: absolute;
+  bottom: 10px; /* Space from the bottom */
+  left: 20px;  /* Space from the left */
+  border: 3px solid white;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-photo img {
+  width: 150px;  /* Size of the profile photo */
+  height: 150px;
+  object-fit: cover; /* Ensures image doesn't stretch, keeps aspect ratio */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Adding shadow to profile image */
+}
+
+/* User Info */
+.mt-5 {
+  margin-top: 3rem; /* Spacing between profile and info section */
+}
+
+h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.text-muted {
+  color: #6c757d; /* Lighter color for bio */
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* Navigation Tabs */
+.nav-tabs {
+  margin-top: 1.5rem;
+}
+
+.nav-tabs .nav-link {
+  font-weight: normal;
+}
+
+.nav-tabs .nav-link.active {
+  font-weight: bold;
+  border-bottom: 3px solid #0d6efd;
+}
+
+/* Handle editing button */
+.btn {
+  cursor: pointer;
+}
+
+/* Responsive Design for smaller devices */
+@media (max-width: 767px) {
+  .profile-photo {
+    bottom: 10px;
+    left: 10px; /* Adjust position on small screens */
   }
-  
-  /* Profile Photo */
-  .profile-photo img {
-    object-fit: cover;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+
+  .cover-photo img {
+    height: 250px; /* Adjust cover photo height on small screens */
   }
-  
-  /* Navigation Tabs */
-  .nav-tabs .nav-link.active {
-    font-weight: bold;
-    border-bottom: 3px solid #0d6efd;
-  }
-  
-  /* What's on Your Mind Section */
-  textarea {
-    resize: none;
-  }
-  
+}

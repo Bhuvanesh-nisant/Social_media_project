@@ -37,7 +37,9 @@ export class NewsfeedComponent implements OnInit {
       this.loadPosts();
     }
   }
-  
+  goToProfile(){
+    this.route.navigate(['/profile']);
+  }
 
   loadPosts(): void {
     this.http.get<Post[]>('http://localhost:8080/api/newsfeed').subscribe(
