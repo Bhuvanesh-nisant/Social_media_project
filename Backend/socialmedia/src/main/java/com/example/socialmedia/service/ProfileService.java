@@ -15,7 +15,6 @@ public class ProfileService {
     }
 
     public Optional<Profile> fetchProfile(String token) {
-        // The repository already returns an Optional, so just pass it along
         return profileRepository.getProfileByToken(token);
     }
 }

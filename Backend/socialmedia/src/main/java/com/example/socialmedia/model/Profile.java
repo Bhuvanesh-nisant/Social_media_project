@@ -5,4 +5,6 @@ public record Profile(
     String profilePhoto,
     String coverPhoto,
     String name
-) {}
+) { public Profile(String name) {
+    this(null, null, null, name);}
+}
