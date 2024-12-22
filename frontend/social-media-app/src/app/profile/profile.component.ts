@@ -9,20 +9,24 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   userName: string = '';
-  userBio: string = '';
+  userAbout: string = ''; // Renamed to `userAbout` to reflect the "About" section
   profilePhotoUrl: string | null = null;
   coverPhotoUrl: string | null = null;
-  errorMessage: string = ''; // To show error messages if any
+  posts: any[] = [];
+  errorMessage: string = ''; // For showing errors
+  activeTab: string = 'about'; // Default tab is "About"
+
+  private defaultProfilePhoto: string = 'assets/images/profile_default_pic.jpg';
+  private defaultCoverPhoto: string = 'assets/images/cover_default_pic.jpg';
 
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
-    const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
+    const token = localStorage.getItem('authToken'); // Retrieve token from localStorage
     if (token) {
       this.getProfileData(token);
     } else {
-      // Redirect to login if no token exists
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']); // Redirect to login if no token exists
     }
   }
 
@@ -30,21 +34,38 @@ export class ProfileComponent implements OnInit {
     this.http.get<any>(`http://localhost:8080/api/profile/${token}`).subscribe(
       (response) => {
         this.userName = response.name || 'Anonymous';
-        this.userBio = response.bio || 'No bio available';
-
-        // Handle profile photo
-        this.profilePhotoUrl = response.profilePhoto
-          ? `data:image/jpeg;base64,${response.profilePhoto}`
-          : 'assets/images/default-profile.png'; // Default profile photo
-
-        // Handle cover photo
-        this.coverPhotoUrl = response.coverPhoto
-          ? `data:image/jpeg;base64,${response.coverPhoto}`
-          : ''; // Default or empty cover photo
+        this.userAbout = response.bio || 'No about information provided.'; // Set bio as about
+        this.profilePhotoUrl = response.profilePhoto || this.defaultProfilePhoto;
+        this.coverPhotoUrl = response.coverPhoto || this.defaultCoverPhoto;
+        this.errorMessage = '';
       },
       (error) => {
         console.error('Error fetching profile data', error);
         this.errorMessage = 'Unable to load profile data. Please try again later.';
+      }
+    );
+  }
+
+  switchTab(tab: string): void {
+    this.activeTab = tab;
+
+    if (tab === 'posts') {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        this.getProfilePosts(token);
+      }
+    }
+  }
+
+  getProfilePosts(token: string): void {
+    this.http.get<any>(`http://localhost:8080/api/profile/${token}/posts`).subscribe(
+      (response) => {
+        this.posts = response.posts || [];
+        this.errorMessage = '';
+      },
+      (error) => {
+        console.error('Error fetching posts', error);
+        this.errorMessage = 'Unable to load posts. Please try again later.';
       }
     );
   }

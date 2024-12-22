@@ -1,79 +1,86 @@
-/* Cover Photo */
+/* Cover Photo Section */
 .cover-photo {
   position: relative;
-  height: 300px; /* Height of cover photo */
+  height: 350px;
+  background-color: #333; /* Default background if no image is set */
+  border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .cover-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures image covers the area without distortion */
+  object-fit: cover;
+  border-radius: 10px;
 }
 
-/* Profile Photo */
+/* Profile Photo Section - Left Corner */
 .profile-photo {
   position: absolute;
-  bottom: 10px; /* Space from the bottom */
-  left: 20px;  /* Space from the left */
-  border: 3px solid white;
-  border-radius: 50%;
+  bottom: -85px; /* Position it above the cover photo */
+  left: 30px; /* Move it to the left */
+  border: 5px solid white; /* Border around profile photo */
+  border-radius: 50%; /* Ensures the profile picture is a circle */
   overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .profile-photo img {
-  width: 150px;  /* Size of the profile photo */
-  height: 150px;
-  object-fit: cover; /* Ensures image doesn't stretch, keeps aspect ratio */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Adding shadow to profile image */
+  width: 180px;  /* Size of profile photo (larger) */
+  height: 180px; /* Size of profile photo (larger) */
+  object-fit: cover; /* Ensures the image fits within the circle */
+  border-radius: 50%; /* Make the image round */
 }
 
-/* User Info */
-.mt-5 {
-  margin-top: 3rem; /* Spacing between profile and info section */
+/* Profile Photo Hover Effect */
+.profile-photo:hover {
+  transform: scale(1.1); /* Slightly enlarge the photo */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* Enhance shadow */
 }
 
-h3 {
-  font-size: 1.8rem;
-  font-weight: bold;
+/* Profile Photo Button (inside Profile Pic) */
+.profile-photo .change-profile-btn {
+  position: absolute;
+  bottom: 5px; /* Position button at the bottom of the profile photo */
+  right: 5px; /* Align button to the right */
+  background-color: #0d6efd; /* Bright blue background */
+  color: white;
+  border: none;
+  padding: 12px; /* Larger padding */
+  border-radius: 50%; /* Make button round */
+  font-size: 1.5rem; /* Icon size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  z-index: 10; /* Ensure button stays on top */
 }
 
-.text-muted {
-  color: #6c757d; /* Lighter color for bio */
+/* Profile Photo Button Hover Effect */
+.profile-photo .change-profile-btn:hover {
+  background-color: #0b5ed7; /* Darker shade of blue */
+  transform: scale(1.1); /* Slightly enlarge the button */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
 }
 
-.btn-primary {
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+/* Cover Photo Button - Right Corner */
+.cover-photo .change-cover-btn {
+  position: absolute;
+  top: 20px; /* Position button at the top-right corner */
+  right: 20px; /* Align button to the right */
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Navigation Tabs */
-.nav-tabs {
-  margin-top: 1.5rem;
-}
-
-.nav-tabs .nav-link {
-  font-weight: normal;
-}
-
-.nav-tabs .nav-link.active {
-  font-weight: bold;
-  border-bottom: 3px solid #0d6efd;
-}
-
-/* Handle editing button */
-.btn {
-  cursor: pointer;
-}
-
-/* Responsive Design for smaller devices */
-@media (max-width: 767px) {
-  .profile-photo {
-    bottom: 10px;
-    left: 10px; /* Adjust position on small screens */
-  }
-
-  .cover-photo img {
-    height: 250px; /* Adjust cover photo height on small screens */
-  }
+.cover-photo .change-cover-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.05);
 }
