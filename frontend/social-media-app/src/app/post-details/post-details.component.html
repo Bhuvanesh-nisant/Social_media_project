@@ -1,20 +1,34 @@
-<div class="card">
-    <div class="card-body">
+<div class="card profile-card">
+  <div class="card-body">
+    <div class="post-header">
       <h5 class="card-title">{{ post.username }}</h5>
-      <p class="card-text">{{ post.content }}</p>
       <p class="text-muted small">{{ post.postedAgo }}</p>
+    </div>
+    <div class="post-content">
+      <p class="card-text">{{ post.content }}</p>
       <div *ngIf="post.image">
-        <img [src]="post.image" alt="Post Image" class="img-fluid" />
-      </div>
-      <div *ngIf="post.comments && post.comments.length > 0">
-        <h6>Comments</h6>
-        <ul class="list-group">
-          <li *ngFor="let comment of post.comments" class="list-group-item">
-            <p>{{ comment.content }}</p>
-            <small class="text-muted">{{ comment.timestamp }}</small>
-          </li>
-        </ul>
+        <img [src]="post.image" alt="Post Image" class="post-image img-fluid" />
       </div>
     </div>
+    <div class="post-actions mt-3 d-flex justify-content-between">
+      <button class="btn btn-light btn-sm" disabled>
+        👍 Like {{ post.likeCount }}
+      </button>
+      <button class="btn btn-light btn-sm" disabled>
+        💬 Comment
+      </button>
+      <button class="btn btn-light btn-sm" disabled>
+        ↪️ Share
+      </button>
+    </div>
+    <div class="comment-section mt-3" *ngIf="post.comments && post.comments.length > 0">
+      <h6>Comments</h6>
+      <ul class="comments-list list-group">
+        <li *ngFor="let comment of post.comments" class="list-group-item">
+          <p>{{ comment.content }}</p>
+          <small class="text-muted">{{ comment.timestamp }}</small>
+        </li>
+      </ul>
+    </div>
   </div>
-  
+</div>
