@@ -11,6 +11,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { ProfileComponent } from './profile/profile.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
 
 
 
@@ -25,6 +26,7 @@ import { ProfileComponent } from './profile/profile.component';
     ForgotPasswordComponent,
     NewsfeedComponent,
     ProfileComponent,
+    PostDetailsComponent,
 
   ],
   imports: [

@@ -1,11 +1,11 @@
 package com.example.socialmedia.repository;
 
-import com.example.socialmedia.model.Profile;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
-import org.springframework.jdbc.core.simple.JdbcClient;
-
 import java.util.Optional;
+
+import org.springframework.jdbc.core.simple.JdbcClient;
+import org.springframework.stereotype.Repository;
+
+import com.example.socialmedia.model.Profile;
 
 @Repository
 public class ProfileRepository {
@@ -16,20 +16,18 @@ public class ProfileRepository {
     }
 
     public Optional<Profile> getProfileByToken(String token) {
-        // Check if the token exists in the 'users' table
         String userQuery = "SELECT name FROM users WHERE token = ?";
         String name = jdbcClient.sql(userQuery)
                 .param(token)
                 .query((rs, rowNum) -> rs.getString("name"))
                 .stream()
                 .findFirst()
-                .orElse(null); // If token is not found in users, return null
+                .orElse(null);
 
         if (name == null) {
-            return Optional.empty(); // Token not found in users table
+            return Optional.empty();
         }
 
-        // If token exists in users table, check if there's a corresponding profile
         String profileQuery = """
             SELECT 
                 p.bio, 
@@ -41,19 +39,17 @@ public class ProfileRepository {
                 p.token = ?;
         """;
 
-        // Check if profile exists
         Optional<Profile> profile = jdbcClient.sql(profileQuery)
                 .param(token)
                 .query((rs, rowNum) -> new Profile(
                         rs.getString("bio"),
                         rs.getString("profile_photo"),
                         rs.getString("cover_photo"),
-                        name // Use the name from the users table
+                        name
                 ))
                 .stream()
                 .findFirst();
 
-        // If profile doesn't exist, return a Profile with only the name
-        return profile.isPresent() ? profile : Optional.of(new Profile(name)); // Return profile with null fields for missing data
+        return profile.isPresent() ? profile : Optional.of(new Profile(name));
     }
 }

@@ -1,0 +1,128 @@
+/* General Styling */
+.card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-body {
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .card-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .card-text {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: #555;
+  }
+  
+  .text-muted {
+    font-size: 0.9em;
+    color: #999;
+  }
+  
+  .img-fluid {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    margin-top: 15px;
+    transition: transform 0.3s ease;
+  }
+  
+  .img-fluid:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Comments Section */
+  .list-group {
+    margin-top: 20px;
+  }
+  
+  .list-group-item {
+    border: 0;
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+    transition: background-color 0.3s ease;
+  }
+  
+  .list-group-item:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .list-group-item:last-child {
+    border-bottom: 0;
+  }
+  
+  .list-group-item p {
+    margin: 0;
+    font-size: 1em;
+    color: #555;
+  }
+  
+  .list-group-item small {
+    font-size: 0.85em;
+    color: #999;
+  }
+  
+  /* Button Styling */
+  .btn-secondary {
+    background-color: #007bff;
+    border: 0;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    font-size: 1em;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .card-body {
+      padding: 15px;
+    }
+  
+    .card-title {
+      font-size: 1.2em;
+    }
+  
+    .card-text {
+      font-size: 1em;
+    }
+  
+    .list-group-item p {
+      font-size: 0.9em;
+    }
+  
+    .list-group-item small {
+      font-size: 0.8em;
+    }
+  
+    .btn-secondary {
+      width: 100%;
+      padding: 12px;
+    }
+  }
+  

@@ -6,21 +6,10 @@
 
   <!-- Cover Photo Section -->
   <div class="cover-photo position-relative" *ngIf="!errorMessage">
-    <img
-      *ngIf="coverPhotoUrl"
-      [src]="coverPhotoUrl"
-      class="img-fluid w-100"
-      alt="Cover Photo"
-    />
+    <img *ngIf="coverPhotoUrl" [src]="coverPhotoUrl" class="img-fluid w-100" alt="Cover Photo" />
     <!-- Profile Photo Section -->
     <div class="profile-photo position-absolute bottom-0 start-0 ms-3 mb-3">
-      <img
-        [src]="profilePhotoUrl"
-        class="rounded-circle border border-3 border-white"
-        alt="Profile Photo"
-        width="150"
-        height="150"
-      />
+      <img [src]="profilePhotoUrl" class="rounded-circle border border-3 border-white" alt="Profile Photo" width="150" height="150" />
     </div>
   </div>
 
@@ -32,17 +21,10 @@
   <!-- Navigation Tabs -->
   <ul class="nav nav-tabs mt-3" *ngIf="!errorMessage">
     <li class="nav-item">
-      <a
-        class="nav-link"
-        [class.active]="activeTab === 'about'"
-        (click)="switchTab('about')"
-        href="#"
-        >About</a
-      >
+      <a class="nav-link" [class.active]="activeTab === 'about'" (click)="switchTab('about')" href="javascript:void(0);">About</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" [class.active]="activeTab === 'posts'" (click)="switchTab('posts')" href="#">
-        Posts</a>
+      <a class="nav-link" [class.active]="activeTab === 'posts'" (click)="switchTab('posts')" href="javascript:void(0);">Posts</a>
     </li>
   </ul>
 
@@ -54,11 +36,30 @@
   <!-- Posts Section -->
   <div class="mt-3" *ngIf="activeTab === 'posts' && !errorMessage">
     <h5>Posts</h5>
-    <div *ngFor="let post of posts" class="card mb-3">
-      <div class="card-body">
-        <h6 class="card-title">{{ post.username }}</h6>
-        <p class="card-text">{{ post.content }}</p>
-        <p class="text-muted small">{{ post.postedAgo }}</p>
+    <!-- Check if posts array is empty -->
+    <div *ngIf="posts.length === 0">
+      <p class="text-center text-muted">No posts yet</p>
+    </div>
+    <!-- Display posts if available -->
+    <div *ngIf="posts.length > 0">
+      <div *ngFor="let post of posts" class="card mb-3">
+        <div class="card-body">
+          <h6 class="card-title">{{ post.username }}</h6>
+          <p class="card-text">{{ post.content }}</p>
+          <p class="text-muted small">{{ post.postedAgo }}</p>
+          <div *ngIf="post.image">
+            <img [src]="post.image" alt="Post Image" class="img-fluid" />
+          </div>
+          <div *ngIf="post.comments && post.comments.length > 0">
+            <h6>Comments</h6>
+            <ul class="list-group">
+              <li *ngFor="let comment of post.comments" class="list-group-item">
+                <p>{{ comment.content }}</p>
+                <small class="text-muted">{{ comment.timestamp }}</small>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>

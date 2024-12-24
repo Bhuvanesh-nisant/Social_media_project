@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ post.username }}</h5>
+      <p class="card-text">{{ post.content }}</p>
+      <p class="text-muted small">{{ post.postedAgo }}</p>
+      <div *ngIf="post.image">
+        <img [src]="post.image" alt="Post Image" class="img-fluid" />
+      </div>
+      <div *ngIf="post.comments && post.comments.length > 0">
+        <h6>Comments</h6>
+        <ul class="list-group">
+          <li *ngFor="let comment of post.comments" class="list-group-item">
+            <p>{{ comment.content }}</p>
+            <small class="text-muted">{{ comment.timestamp }}</small>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
