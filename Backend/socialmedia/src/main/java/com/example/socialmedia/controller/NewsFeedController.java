@@ -45,7 +45,6 @@ public class NewsFeedController {
         return ResponseEntity.ok(response);
     }
 
-
     @PostMapping("/{postId}/comments")
     public ResponseEntity<String> addComment(@PathVariable int postId, @RequestBody Comment newComment) {
         newsFeedService.addCommentToPost(postId, newComment);
