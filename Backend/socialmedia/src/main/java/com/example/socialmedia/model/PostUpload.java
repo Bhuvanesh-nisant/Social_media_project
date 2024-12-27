@@ -1,9 +1,8 @@
 package com.example.socialmedia.model;
 
-public record PostRequest(
+public record PostUpload(
     String username,
     String content,
-    String image,
-    int likeCount,
+    String image, // Base64 image value
     String token
 ) {}
