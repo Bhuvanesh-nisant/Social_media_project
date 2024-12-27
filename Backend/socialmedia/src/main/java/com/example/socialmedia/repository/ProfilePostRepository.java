@@ -61,12 +61,14 @@ public class ProfilePostRepository {
             SELECT id, username, postedAgo, content, image, likeCount
             FROM posts
             WHERE token = ?
+            ORDER BY postedAgo DESC
         """;
 
         String fetchCommentsQuery = """
             SELECT id, content, timestamp
             FROM comments
             WHERE post_id = ?
+            ORDER BY timestamp DESC
         """;
 
         return jdbcClient.sql(fetchPostsQuery).param(token).query((postRs, postRowNum) -> {

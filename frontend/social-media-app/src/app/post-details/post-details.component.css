@@ -1,77 +1,158 @@
-/* General Styling */
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Profile Card Styling */
 .profile-card {
-  width: 100%;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  margin: 20px auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .profile-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Body */
+.profile-card .card-body {
+  padding: 20px;
+}
+
+/* Post Header */
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .post-header h5 {
-  margin: 0;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   font-weight: bold;
+  color: #333333;
 }
 
-.post-header p {
-  color: #888;
-  font-size: 0.9em;
+.post-header .text-muted {
+  font-size: 0.85rem;
+  color: #888888;
 }
 
+/* Post Content */
 .post-content {
-  margin-top: 15px;
-  font-size: 1em;
+  margin-bottom: 20px;
+}
+
+.post-content .card-text {
+  font-size: 1rem;
+  color: #555555;
   line-height: 1.6;
 }
 
-.post-image {
-  width: 100%;
-  height: auto;
-  max-height: 400px;
-  display: block;
-  object-fit: contain;
-  object-position: center;
-  border-radius: 8px;
+.post-content .post-image {
+  width: 100%; /* Ensures the image spans the full width of the container */
+  height: auto; /* Maintains the aspect ratio */
+  border-radius: 8px; /* Adds a smooth corner rounding */
+  object-fit: cover; /* Ensures the image fits without distortion */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better appearance */
   margin-top: 10px;
 }
 
+
+.post-content .post-image:hover {
+  transform: scale(1.02);
+}
+
+/* Post Actions */
+.post-actions {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 15px;
+}
+
 .post-actions button {
-  padding: 8px 15px;
-  font-size: 0.9em;
-  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.post-actions button:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.post-actions button:disabled {
   cursor: not-allowed;
-  transition: background-color 0.3s ease;
+}
+
+/* Comment Section */
+.comment-section {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.comment-section h6 {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 10px;
 }
 
 .comments-list {
   list-style-type: none;
   padding: 0;
-  margin-top: 10px;
 }
 
-.comments-list li {
-  padding: 8px 0;
-  border-bottom: 1px solid #f1f1f1;
+.comments-list .list-group-item {
+  padding: 10px 15px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.comments-list .list-group-item p {
+  font-size: 0.95rem;
+  color: #555555;
+  margin-bottom: 5px;
+}
+
+.comments-list .list-group-item small {
+  font-size: 0.8rem;
+  color: #888888;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+  .profile-card {
+    margin: 10px;
+  }
+
   .post-header h5 {
-    font-size: 1.1em;
+    font-size: 1rem;
   }
 
-  .post-content {
-    font-size: 0.9em;
+  .post-content .card-text {
+    font-size: 0.9rem;
   }
 
-  .comments-list li {
-    font-size: 0.85em;
+  .post-actions button {
+    font-size: 0.8rem;
+  }
+
+  .comment-section h6 {
+    font-size: 0.9rem;
   }
 }

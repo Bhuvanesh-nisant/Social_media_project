@@ -7,7 +7,7 @@ public record PostWithComments(
     String username,
     String postedAgo,
     String content,
-    byte[] image,
+    String image,  // String type for image (Base64 or raw value)
     int likeCount,
     List<Comment> comments
 ) {}

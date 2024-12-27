@@ -8,10 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.example.socialmedia.model.Comment;
 import com.example.socialmedia.model.PostWithComments;
 
-
-
 @Repository
 public class PostRepository {
+
     private final JdbcClient jdbcClient;
 
     public PostRepository(JdbcClient jdbcClient) {
@@ -22,6 +21,7 @@ public class PostRepository {
         String fetchPostsQuery = """
             SELECT id, username, postedAgo, content, image, likeCount
             FROM posts
+             ORDER BY postedAgo DESC
         """;
 
         String fetchCommentsQuery = """
@@ -33,6 +33,7 @@ public class PostRepository {
         return jdbcClient.sql(fetchPostsQuery).query((postRs, postRowNum) -> {
             int postId = postRs.getInt("id");
 
+            // Fetch comments for each post
             List<Comment> comments = jdbcClient.sql(fetchCommentsQuery)
                 .param(postId)
                 .query((commentRs, commentRowNum) -> new Comment(
@@ -42,12 +43,15 @@ public class PostRepository {
                 ))
                 .list();
 
+            // Return the 'image' field as it is (Base64 or raw value)
+            String image = postRs.getString("image");
+
             return new PostWithComments(
                 postId,
                 postRs.getString("username"),
                 postRs.getString("postedAgo"),
                 postRs.getString("content"),
-                postRs.getBytes("image"),
+                image,  // Raw image string from DB
                 postRs.getInt("likeCount"),
                 comments
             );
@@ -55,7 +59,7 @@ public class PostRepository {
     }
 
     public boolean incrementLikeCount(int postId) {
-    	String updateQuery = "UPDATE posts SET likeCount = likeCount + 1 WHERE id = ?";
+        String updateQuery = "UPDATE posts SET likeCount = likeCount + 1 WHERE id = ?";
         return jdbcClient.sql(updateQuery).param(postId).update() > 0;
     }
 
@@ -66,5 +70,4 @@ public class PostRepository {
             .param(comment.content())
             .update();
     }
-
 }

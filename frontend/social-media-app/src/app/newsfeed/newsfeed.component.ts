@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 interface Comment {
+  id?: number; // Optional because the backend generates it
   content: string;
   timestamp: string;
 }
 
 interface Post {
-  postId: number;
-  id?: number; 
+  postId: number; // Primary identifier for posts
   username: string;
   postedAgo: string;
   content: string;
@@ -37,19 +37,15 @@ export class NewsfeedComponent implements OnInit {
       this.loadPosts();
     }
   }
-  goToProfile(){
+
+  goToProfile(): void {
     this.route.navigate(['/profile']);
   }
 
   loadPosts(): void {
     this.http.get<Post[]>('http://localhost:8080/api/newsfeed').subscribe(
       (data) => {
-        
-        this.posts = data.map(post => ({
-          ...post,
-          id: post.postId, 
-          image: post.image ? `data:image/jpeg;base64,${post.image}` : null
-        }));
+        this.posts = data; // Assign the response directly without modification
         console.log('Loaded posts:', this.posts); // Debugging: Log loaded posts
       },
       (error) => {
@@ -81,29 +77,39 @@ export class NewsfeedComponent implements OnInit {
 
   addComment(post: Post, event: Event): void {
     event.preventDefault();
+
+    // Ensure the comment input is valid
     if (this.newComment.trim()) {
       const newComment: Comment = {
         content: this.newComment.trim(),
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(), // Timestamp for the comment
       };
 
-      post.comments.push(newComment); // Add comment locally for instant feedback
+      // Optimistic UI update for instant feedback
+      post.comments.push(newComment);
       this.newComment = ''; // Clear the input field
 
-      this.http.post(`http://localhost:8080/api/newsfeed/${post.id}/comments`, newComment).subscribe(
-        () => console.log(`Comment added to post ${post.id}`),
-        (error) => console.error('Error adding comment', error)
-      );
+      // Send the comment to the backend
+      this.http.post(`http://localhost:8080/api/newsfeed/${post.postId}/comments`, newComment, { responseType: 'text' })
+        .subscribe(
+          (response) => {
+            console.log(response); // Log the plain text response
+          },
+          (error) => {
+            console.error('Error adding comment', error);
+            // Roll back UI change if the request fails
+            post.comments.pop();
+          }
+        );
     }
   }
+
   Logout(): void {
     // Clear token and timestamp from localStorage
     localStorage.removeItem('authToken');
     localStorage.removeItem('tokenTimestamp');
-  
+
     // Redirect to home
     this.route.navigate(['/home']);
   }
-  
-
 }

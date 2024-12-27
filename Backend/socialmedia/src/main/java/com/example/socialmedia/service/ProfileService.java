@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.socialmedia.model.PostWithComments;
 import com.example.socialmedia.model.Profile;
+import com.example.socialmedia.model.ProfilePostWithComments;
 import com.example.socialmedia.repository.ProfilePostRepository;
 import com.example.socialmedia.repository.ProfileRepository;
 
@@ -24,7 +25,7 @@ public class ProfileService {
         return profileRepository.getProfileByToken(token);
     }
 
-    public List<PostWithComments> fetchUserPosts(String token) {
+    public List<ProfilePostWithComments> fetchUserPosts(String token) {
         return profilePostRepository.getUserPostsWithComments(token);
     }
 }
