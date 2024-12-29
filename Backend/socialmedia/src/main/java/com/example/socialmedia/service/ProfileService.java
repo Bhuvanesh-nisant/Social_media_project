@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-
-import com.example.socialmedia.model.PostWithComments;
 import com.example.socialmedia.model.Profile;
 import com.example.socialmedia.model.ProfilePostWithComments;
 import com.example.socialmedia.repository.ProfilePostRepository;

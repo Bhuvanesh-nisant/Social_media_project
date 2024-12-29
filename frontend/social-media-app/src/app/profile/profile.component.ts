@@ -55,4 +55,75 @@ export class ProfileComponent implements OnInit {
   switchTab(tab: string): void {
     this.activeTab = tab;
   }
+
+  // Method to navigate to Add Post page
+  navigateToAddPost(): void {
+    this.router.navigate(['/add-post']); // You can replace with your actual route for adding a post
+  }
+
+  // Method to upload Profile Photo
+  uploadProfilePhoto(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const base64Image = reader.result as string; // Convert to Base64
+        const token = this.authService.getToken(); // Get the token from AuthService
+
+        const payload = {
+          token: token,
+          profilePhoto: base64Image, // Send profile photo in base64
+          coverPhoto: null // If not updating cover photo, send null
+        };
+
+        // Send request to update profile photo
+        this.http.post('http://localhost:8080/api/profile/update', payload).subscribe(
+          () => {
+            this.profilePhotoUrl = base64Image; // Update the displayed profile photo
+          },
+          (error) => {
+            console.error('Error uploading profile photo', error);
+            this.errorMessage = 'Failed to upload profile photo. Please try again later.';
+          }
+        );
+      };
+
+      reader.readAsDataURL(file); // Convert the file to Base64 string
+    }
+  }
+
+  // Method to upload Cover Photo
+  uploadCoverPhoto(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const base64Image = reader.result as string; // Convert to Base64
+        const token = this.authService.getToken(); // Get the token from AuthService
+
+        const payload = {
+          token: token,
+          profilePhoto: null, // If not updating profile photo, send null
+          coverPhoto: base64Image // Send cover photo in base64
+        };
+
+        // Send request to update cover photo
+        this.http.post('http://localhost:8080/api/profile/update', payload).subscribe(
+          () => {
+            this.coverPhotoUrl = base64Image; // Update the displayed cover photo
+          },
+          (error) => {
+            console.error('Error uploading cover photo', error);
+            this.errorMessage = 'Failed to upload cover photo. Please try again later.';
+          }
+        );
+      };
+
+      reader.readAsDataURL(file); // Convert the file to Base64 string
+    }
+  }
 }

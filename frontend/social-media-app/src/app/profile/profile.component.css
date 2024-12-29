@@ -1,8 +1,14 @@
+/* Global Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+}
+
 /* Cover Photo Section */
 .cover-photo {
   position: relative;
   height: 350px;
-  background-color: #333; /* Default background if no image is set */
+  background-color: #333;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -15,75 +21,152 @@
   border-radius: 10px;
 }
 
+.upload-cover {
+  display: block;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+}
 
-
-/* Profile Photo Section - Left Corner */
-.profile-photo {
+.upload-cover .upload-input {
   position: absolute;
-  bottom: -85px; /* Position it above the cover photo */
-  left: 30px; /* Move it to the left */
-  border: 5px solid white; /* Border around profile photo */
-  border-radius: 50%; /* Ensures the profile picture is a circle */
-  overflow: hidden;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
 }
 
-.profile-photo img {
-  width: 180px;  /* Size of profile photo (larger) */
-  height: 180px; /* Size of profile photo (larger) */
-  object-fit: cover; /* Ensures the image fits within the circle */
-  border-radius: 50%; /* Make the image round */
-}
-
-/* Profile Photo Hover Effect */
-.profile-photo:hover {
-  transform: scale(1.1); /* Slightly enlarge the photo */
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* Enhance shadow */
-}
-
-/* Profile Photo Button (inside Profile Pic) */
-.profile-photo .change-profile-btn {
+.upload-cover .cover-overlay {
   position: absolute;
-  bottom: 5px; /* Position button at the bottom of the profile photo */
-  right: 5px; /* Align button to the right */
-  background-color: #0d6efd; /* Bright blue background */
-  color: white;
-  border: none;
-  padding: 12px; /* Larger padding */
-  border-radius: 50%; /* Make button round */
-  font-size: 1.5rem; /* Icon size */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
-  z-index: 10; /* Ensure button stays on top */
-}
-
-/* Profile Photo Button Hover Effect */
-.profile-photo .change-profile-btn:hover {
-  background-color: #0b5ed7; /* Darker shade of blue */
-  transform: scale(1.1); /* Slightly enlarge the button */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
-}
-
-/* Cover Photo Button - Right Corner */
-.cover-photo .change-cover-btn {
-  position: absolute;
-  top: 20px; /* Position button at the top-right corner */
-  right: 20px; /* Align button to the right */
+  bottom: 20px;
+  right: 20px;
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
-  border: none;
+  font-size: 1.2rem;
   padding: 10px 20px;
-  font-size: 1rem;
   border-radius: 5px;
+  text-align: center;
+  display: none;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.cover-photo .change-cover-btn:hover {
+.upload-cover:hover .cover-overlay {
+  display: block;
   background-color: rgba(0, 0, 0, 0.8);
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
+/* Profile Photo Section */
+.profile-photo {
+  position: absolute;
+  bottom: -85px;
+  left: 30px;
+  border: 5px solid white;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.profile-photo img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.upload-profile {
+  position: relative;
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  cursor: pointer;
+}
+
+.upload-profile .upload-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload-profile .profile-overlay {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: #0d6efd;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.upload-profile:hover .profile-overlay {
+  display: flex;
+  background-color: grey;
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* About and Posts Tabs */
+.nav-tabs .nav-link {
+  font-size: 1rem;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #0d6efd;
+}
+
+.nav-tabs .nav-link.active {
+  color: #0d6efd;
+  border-color: #0d6efd #0d6efd #fff;
+}
+
+/* Posts Section */
+.no-posts-message {
+  font-style: italic;
+  color: #777;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Add New Post Button */
+.add-new-post-btn {
+  position: absolute;
+  top: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+  font-size: 1rem;
+  padding: 8px 16px;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.add-new-post-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Add styles for the "Add New Post" button */
+.add-post-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  font-size: 1rem;
+  padding: 10px 20px;
+}

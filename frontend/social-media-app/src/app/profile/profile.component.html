@@ -6,31 +6,81 @@
 
   <!-- Cover Photo Section -->
   <div class="cover-photo position-relative" *ngIf="!errorMessage">
-    <img *ngIf="coverPhotoUrl" [src]="coverPhotoUrl" class="img-fluid w-100" alt="Cover Photo" />
+    <label class="upload-cover d-block">
+      <img
+        *ngIf="coverPhotoUrl"
+        [src]="coverPhotoUrl"
+        class="img-fluid w-100 cover-photo-img"
+        alt="Cover Photo"
+      />
+      <input
+        type="file"
+        accept="image/*"
+        class="upload-input"
+        (change)="uploadCoverPhoto($event)"
+        aria-label="Upload Cover Photo"
+      />
+      <span class="cover-overlay btn btn-sm btn-dark">Change Cover Photo</span>
+    </label>
+
     <!-- Profile Photo Section -->
     <div class="profile-photo position-absolute bottom-0 start-0 ms-3 mb-3">
-      <img [src]="profilePhotoUrl" class="rounded-circle border border-3 border-white" alt="Profile Photo" width="150" height="150" />
+      <label class="upload-profile d-inline-block position-relative">
+        <img
+          [src]="profilePhotoUrl"
+          class="rounded-circle border border-3 border-white profile-photo-img"
+          alt="Profile Photo"
+          width="120"
+          height="120"
+        />
+        <input
+          type="file"
+          accept="image/*"
+          class="upload-input"
+          (change)="uploadProfilePhoto($event)"
+          aria-label="Upload Profile Photo"
+        />
+        <span
+          class="profile-overlay d-flex align-items-center justify-content-center"
+        >
+          <i class="bi bi-camera-fill"></i>
+        </span>
+      </label>
     </div>
   </div>
 
   <!-- User Info Section -->
   <div class="mt-5" *ngIf="!errorMessage">
-    <h3>{{ userName }}</h3>
+    <h3 class="user-name">{{ userName }}</h3>
   </div>
 
   <!-- Navigation Tabs -->
   <ul class="nav nav-tabs mt-3" *ngIf="!errorMessage">
     <li class="nav-item">
-      <a class="nav-link" [class.active]="activeTab === 'about'" (click)="switchTab('about')" href="javascript:void(0);">About</a>
+      <a
+        class="nav-link"
+        [class.active]="activeTab === 'about'"
+        (click)="switchTab('about')"
+        href="javascript:void(0);"
+      >
+        About
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" [class.active]="activeTab === 'posts'" (click)="switchTab('posts')" href="javascript:void(0);">Posts</a>
+      <a
+        class="nav-link"
+        [class.active]="activeTab === 'posts'"
+        (click)="switchTab('posts')"
+        href="javascript:void(0);"
+      >
+        Posts
+      </a>
     </li>
   </ul>
 
   <!-- About Section -->
   <div class="mt-3" *ngIf="activeTab === 'about' && !errorMessage">
-    <p>{{ userAbout }}</p>
+    <p class="user-about">{{ userAbout }}</p>
   </div>
 
   <!-- Posts Section -->
@@ -38,7 +88,7 @@
     <h5>Posts</h5>
     <!-- Check if posts array is empty -->
     <div *ngIf="posts.length === 0">
-      <p class="no-posts-message">No posts yet</p>
+      <p class="no-posts-message text-muted">No posts yet</p>
     </div>
     <!-- Display posts if available -->
     <div *ngIf="posts.length > 0">
