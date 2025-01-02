@@ -96,3 +96,35 @@
     </div>
   </div>
 </div>
+
+<!-- Add New Post Button -->
+<button class="btn add-new-post-btn" (click)="openAddPostModal()">Add New Post</button>
+
+<!-- Add New Post Modal -->
+<div *ngIf="showAddPostModal" class="modal-backdrop">
+  <div class="modal-content">
+    <h3>Add New Post</h3>
+    <textarea
+      class="form-control"
+      rows="4"
+      placeholder="Tell something..."
+      [(ngModel)]="postContent"
+      (input)="updateUploadButtonState()"
+    ></textarea>
+
+    <div class="mt-3">
+      <input type="file" (change)="handleFileInput($event)" accept="image/*" />
+    </div>
+
+    <div class="mt-3">
+      <button
+        class="btn btn-primary"
+        [disabled]="isUploadPostDisabled"
+        (click)="submitPost()"
+      >
+        Upload Post
+      </button>
+      <button class="btn btn-secondary" (click)="closeAddPostModal()">Cancel</button>
+    </div>
+  </div>
+</div>

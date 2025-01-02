@@ -8,6 +8,7 @@ import com.example.socialmedia.service.PostUploadService;
 
 @RestController
 @RequestMapping("/api/posts")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PostUploadController {
     private final PostUploadService postUploadService;
 

@@ -17,6 +17,12 @@ export class ProfileComponent implements OnInit {
   errorMessage: string = '';
   activeTab: string = 'about';
 
+  //Add post//
+  showAddPostModal: boolean = false; // Track the modal visibility
+  postContent: string = ''; // Store the post content
+  selectedImage: string | null = null; // Store the selected image as a base64 string
+  isUploadPostDisabled: boolean = true
+
   private defaultProfilePhoto: string = 'assets/images/profile_default_pic.jpg';
   private defaultCoverPhoto: string = 'assets/images/cover_default_pic.jpg';
 
@@ -126,4 +132,59 @@ export class ProfileComponent implements OnInit {
       reader.readAsDataURL(file); // Convert the file to Base64 string
     }
   }
+  openAddPostModal(): void {
+    this.showAddPostModal = true;
+  }
+
+  closeAddPostModal(): void {
+    this.showAddPostModal = false;
+    this.postContent = '';
+    this.selectedImage = null;
+    this.isUploadPostDisabled = true;
+  }
+
+  handleFileInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.selectedImage = reader.result as string;
+        this.updateUploadButtonState();
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+  updateUploadButtonState(): void {
+    this.isUploadPostDisabled = !this.postContent.trim() && !this.selectedImage;
+  }
+
+  submitPost(): void {
+    if (!this.authService.isAuthenticated()) return;
+
+    const token = this.authService.getToken();
+    if (token) {
+      const payload = {
+        username: this.userName,
+        content: this.postContent,
+        image: this.selectedImage || '',
+        token: token
+      };
+
+      this.http.post('http://localhost:8080/api/posts/upload', payload).subscribe(
+        () => {
+          this.posts.unshift(payload); // Add the new post to the top of the list
+          this.closeAddPostModal();
+        },
+        (error) => {
+          console.error('Error submitting post', error);
+        }
+      );
+      
+    }
+  }
 }
+
