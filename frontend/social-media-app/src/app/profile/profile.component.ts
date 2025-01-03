@@ -178,6 +178,8 @@ export class ProfileComponent implements OnInit {
         () => {
           this.posts.unshift(payload); // Add the new post to the top of the list
           this.closeAddPostModal();
+
+          this.router.navigate(['/newsfeed']);
         },
         (error) => {
           console.error('Error submitting post', error);
