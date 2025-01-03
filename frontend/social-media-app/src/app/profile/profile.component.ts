@@ -17,11 +17,11 @@ export class ProfileComponent implements OnInit {
   errorMessage: string = '';
   activeTab: string = 'about';
 
-  //Add post//
-  showAddPostModal: boolean = false; // Track the modal visibility
-  postContent: string = ''; // Store the post content
-  selectedImage: string | null = null; // Store the selected image as a base64 string
-  isUploadPostDisabled: boolean = true
+  // Add Post Modal Variables
+  showAddPostModal: boolean = false; // Track modal visibility
+  postContent: string = ''; // Store post content
+  selectedImage: string | null = null; // Store selected image as Base64 string
+  isUploadPostDisabled: boolean = true; // Track upload button state
 
   private defaultProfilePhoto: string = 'assets/images/profile_default_pic.jpg';
   private defaultCoverPhoto: string = 'assets/images/cover_default_pic.jpg';
@@ -39,6 +39,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  // Fetch profile and posts data
   getProfileAndPostsData(token: string): void {
     this.http.get<any>(`http://localhost:8080/api/profile/${token}`).subscribe(
       (response) => {
@@ -48,7 +49,6 @@ export class ProfileComponent implements OnInit {
         this.profilePhotoUrl = profile.profilePhoto || this.defaultProfilePhoto;
         this.coverPhotoUrl = profile.coverPhoto || this.defaultCoverPhoto;
         this.errorMessage = '';
-
         this.posts = posts || [];
       },
       (error) => {
@@ -58,16 +58,12 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  // Tab switching
   switchTab(tab: string): void {
     this.activeTab = tab;
   }
 
-  // Method to navigate to Add Post page
-  navigateToAddPost(): void {
-    this.router.navigate(['/add-post']); // You can replace with your actual route for adding a post
-  }
-
-  // Method to upload Profile Photo
+  // Upload profile photo
   uploadProfilePhoto(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -75,19 +71,18 @@ export class ProfileComponent implements OnInit {
       const reader = new FileReader();
 
       reader.onload = () => {
-        const base64Image = reader.result as string; // Convert to Base64
-        const token = this.authService.getToken(); // Get the token from AuthService
+        const base64Image = reader.result as string;
+        const token = this.authService.getToken();
 
         const payload = {
           token: token,
-          profilePhoto: base64Image, // Send profile photo in base64
-          coverPhoto: null // If not updating cover photo, send null
+          profilePhoto: base64Image,
+          coverPhoto: null
         };
 
-        // Send request to update profile photo
         this.http.post('http://localhost:8080/api/profile/update', payload).subscribe(
           () => {
-            this.profilePhotoUrl = base64Image; // Update the displayed profile photo
+            this.profilePhotoUrl = base64Image;
           },
           (error) => {
             console.error('Error uploading profile photo', error);
@@ -96,11 +91,11 @@ export class ProfileComponent implements OnInit {
         );
       };
 
-      reader.readAsDataURL(file); // Convert the file to Base64 string
+      reader.readAsDataURL(file);
     }
   }
 
-  // Method to upload Cover Photo
+  // Upload cover photo
   uploadCoverPhoto(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -108,19 +103,18 @@ export class ProfileComponent implements OnInit {
       const reader = new FileReader();
 
       reader.onload = () => {
-        const base64Image = reader.result as string; // Convert to Base64
-        const token = this.authService.getToken(); // Get the token from AuthService
+        const base64Image = reader.result as string;
+        const token = this.authService.getToken();
 
         const payload = {
           token: token,
-          profilePhoto: null, // If not updating profile photo, send null
-          coverPhoto: base64Image // Send cover photo in base64
+          profilePhoto: null,
+          coverPhoto: base64Image
         };
 
-        // Send request to update cover photo
         this.http.post('http://localhost:8080/api/profile/update', payload).subscribe(
           () => {
-            this.coverPhotoUrl = base64Image; // Update the displayed cover photo
+            this.coverPhotoUrl = base64Image;
           },
           (error) => {
             console.error('Error uploading cover photo', error);
@@ -129,20 +123,29 @@ export class ProfileComponent implements OnInit {
         );
       };
 
-      reader.readAsDataURL(file); // Convert the file to Base64 string
+      reader.readAsDataURL(file);
     }
   }
+
+  // Open Add Post modal
   openAddPostModal(): void {
     this.showAddPostModal = true;
   }
 
+  // Close Add Post modal
   closeAddPostModal(): void {
     this.showAddPostModal = false;
     this.postContent = '';
     this.selectedImage = null;
     this.isUploadPostDisabled = true;
+
+    // Remove leftover modal elements (in case of Bootstrap modals)
+    document.body.classList.remove('modal-open');
+    const backdrops = document.querySelectorAll('.modal-backdrop');
+    backdrops.forEach((backdrop) => backdrop.remove());
   }
 
+  // Handle file input for Add Post modal
   handleFileInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -158,13 +161,15 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  // Update the upload button state
   updateUploadButtonState(): void {
     this.isUploadPostDisabled = !this.postContent.trim() && !this.selectedImage;
   }
 
+  // Submit a new post
   submitPost(): void {
     if (!this.authService.isAuthenticated()) return;
-
+  
     const token = this.authService.getToken();
     if (token) {
       const payload = {
@@ -173,20 +178,23 @@ export class ProfileComponent implements OnInit {
         image: this.selectedImage || '',
         token: token
       };
-
-      this.http.post('http://localhost:8080/api/posts/upload', payload).subscribe(
-        () => {
-          this.posts.unshift(payload); // Add the new post to the top of the list
-          this.closeAddPostModal();
-
-          this.router.navigate(['/newsfeed']);
+  
+      this.http.post<{ message: string }>('http://localhost:8080/api/posts/upload', payload).subscribe(
+        (response) => {
+          console.log(response.message); // Log success message
+          this.posts.unshift(payload); // Add the new post to the list
+          this.closeAddPostModal(); // Close the modal
+          
+          setTimeout(() => {
+            this.router.navigate(['/newsfeed']); // Navigate to the News Feed
+          }, 200);
         },
         (error) => {
           console.error('Error submitting post', error);
+          this.errorMessage = 'Failed to upload post. Please try again later.';
         }
       );
-      
     }
   }
+  
 }
-
