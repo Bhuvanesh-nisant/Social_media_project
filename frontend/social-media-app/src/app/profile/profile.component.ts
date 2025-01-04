@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   isUploadPostDisabled: boolean = true; // Track upload button state
 
   private defaultProfilePhoto: string = 'assets/images/profile_default_pic.jpg';
-  private defaultCoverPhoto: string = 'assets/images/cover_default_pic.jpg';
+  private defaultCoverPhoto: string = 'assets/images/Cover_default.jpg';
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
 
